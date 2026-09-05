@@ -2,6 +2,8 @@ import http.client
 import os
 from dotenv import load_dotenv
 
+from class_files.team import Team
+
 load_dotenv()
 api_key = os.getenv("HOCKEY_API_KEY")
 
@@ -11,9 +13,7 @@ headers = {
     'x-apisports-key': api_key
     }
 
-conn.request("GET", "/teams?id=132", headers=headers)
+pce = Team(conn, headers, params={"team": 132})
+vse = Team(conn, headers, params={"team": 153})
 
-res = conn.getresponse()
-data = res.read()
-
-print(data.decode("utf-8"))
+jeHra = pce.isGame()
